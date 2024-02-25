@@ -8,7 +8,7 @@ class App {
     // Game logic for a number guessing game
     fun playNumberGame(digitsToGuess: Int = 4) {
         //TODO: build a menu which calls the functions and works with the return values
-        val genNum = generateRandomNonRepeatingNumber(digitsToGuess)
+        var genNum = generateRandomNonRepeatingNumber(digitsToGuess)
         println("Guess the $digitsToGuess digit number $genNum")
 
         do {
@@ -70,7 +70,8 @@ class App {
     val checkUserInputAgainstGeneratedNumber: (Int, Int) -> CompareResult = { input, generatedNumber ->
         //TODO implement the function
         val inputStr = input.toString()
-        val genNumStr = generatedNumber.toString()
+        var genNumStr = generatedNumber.toString()
+        var tempGenNumStr = genNumStr
         var correctDigitsCount = 0
         var correctPositionsCount = 0
 
@@ -78,12 +79,13 @@ class App {
             throw IllegalArgumentException("Input and generated number must have the same number of digits.")
         }
 
-        for (i in 0.. inputStr.length-1) {
-            if (genNumStr.contains(inputStr[i])) {
+        for (i in inputStr.indices) {
+            if (tempGenNumStr.contains(inputStr[i])) {
                 correctDigitsCount++
-                if (genNumStr[i] == inputStr[i]) {
-                    correctPositionsCount++
-                }
+                tempGenNumStr = tempGenNumStr.replaceFirst(inputStr[i], '*')
+            }
+            if (genNumStr[i] == inputStr[i]) {
+                correctPositionsCount++
             }
         }
 
@@ -94,6 +96,6 @@ class App {
 fun main() {
     // TODO: call the App.playNumberGame function with and without default arguments
     val app = App()
-    app.playNumberGame(6)
+    app.playNumberGame(3)
     app.playNumberGame()
 }

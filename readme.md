@@ -9,17 +9,38 @@
 ## Questions
 ### Describe how Kotlin handles null safety. What are nullable types and non-null types in Kotlin? (0,5 points)
 
-<span style="color:blue">Provide your answer here! </span>
-> Note: you can also use code snippets to illustrate your answer. 
-
-```kotlin 
-// example code snippet
+Kotlin differs between nullable types and non- nullable types.
+non-nullable types are variables that can’t hold null.
+```kotlin
 val a: String = "value" // non-null type
+print(a.length)
 ```
+output:
+```kotlin
+5
+```
+nullable types are variables that can hold null.
+```kotlin     
+val b: String? = "value" // nullable type
+b = null
+print(b?.length)
+```
+output:
+```kotlin
+null
+```
+In some of the other languages null can cause many problems with Runtime null-pointer-exceptions. Kotlin is Null safe because it has an operator, the ```
+ .?```, that tells the compiler that the variable could be null. By doing this if the value gets assigned/reassign null the program won’t crash or throw a null pointer exception. Its stopping any operations with that variable and replaces it with the ```null``` value. Kotlin don’t defaults nullability because of convenience with java objects.
 
 ### What are lambda expressions and higher order functions in Kotlin? Why would you store a function inside a variable? (0,5 points)
 
-<span style="color:blue">Provide your answer here!</span>
+Lambda expressions are functions that are used like variable values. You can pass functions und return functions with lambda expressions they also can be handled with the ```.?``` operator to provide null safety.
+```kotlin
+val treat: () -> Unit =              // () -> Unit is the Datatype  
+    { println("Have a treat!") }    // this is the value, a function
+```
+Higher order functions are functions that return a function or takes functions as an argument.
+like the ```repeat()``` function. You would store a function inside a variable to make the code more readable, dynamic, and concise.
 
 ### Provide a solution for the following number guessing game inside `App.kt`. (3 points)
 
